@@ -41,3 +41,15 @@ If you would rather have a human-reviewed report than wire up the CLI yourself:
 
 ---
 
+
+
+## 🤝 Companion products (same author)
+
+Full AI agent QA + safety stack:
+
+- **mcp-doctor** (this repo) - install-time MCP supply-chain trust scanner
+- **prompt-redteam** - github.com/weiseer/prompt-redteam - open-source jailbreak / prompt-injection tester (30+ patterns)
+- **AI Agent QA Eval Pack** - 23 YAML test cases for tool-using agents across 6 failure dimensions (accuracy / safety / edge cases / prompt injection / hallucination / cost efficiency). Vendor-agnostic, no SDK migration. 9 at weiseer.gumroad.com/l/dcipxt
+
+mcp-doctor checks what you install. prompt-redteam checks what you say. eval-pack checks what your agent loop does.
+
