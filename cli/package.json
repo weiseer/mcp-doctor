@@ -1,6 +1,6 @@
 {
   "name": "@weiseer/mcp-doctor",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "mcpName": "io.github.weiseer/mcp-doctor",
   "description": "Install-time trust gate for MCP servers — PASS/WARN/BLOCK + cited evidence + GitHub Action support.",
   "type": "module",
