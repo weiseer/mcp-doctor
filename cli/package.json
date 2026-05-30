@@ -1,0 +1,44 @@
+{
+  "name": "@weiseer/mcp-doctor",
+  "version": "0.1.0",
+  "mcpName": "io.github.weiseer/mcp-doctor",
+  "description": "Install-time trust gate for MCP servers — PASS/WARN/BLOCK + cited evidence + GitHub Action support.",
+  "type": "module",
+  "bin": {
+    "mcp-doctor": "./bin/mcp-doctor.js"
+  },
+  "main": "./lib/index.js",
+  "files": [
+    "bin/",
+    "lib/",
+    "rubric.yaml",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node bin/mcp-doctor.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "trust",
+    "supply-chain",
+    "vulnerability",
+    "audit",
+    "ai-agent",
+    "weiseer"
+  ],
+  "author": "weiseer <wei@weiseer.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weiseer/mcp-doctor.git"
+  },
+  "homepage": "https://github.com/weiseer/mcp-doctor#readme",
+  "bugs": {
+    "url": "https://github.com/weiseer/mcp-doctor/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

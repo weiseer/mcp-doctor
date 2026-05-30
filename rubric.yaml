@@ -1,0 +1,135 @@
+# weiseer mcp-doctor — trust scoring rubric v0.1.0
+# Published 2026-05-30. Open-source by design — anyone can audit, fork, debate.
+#
+# How verdicts work:
+#   score = 100 - sum(deduction for each triggered signal)
+#   verdict: >= 80 PASS, 50-79 WARN, < 50 BLOCK
+#   any "hard_block: true" signal that triggers forces BLOCK regardless of score.
+#
+# Weights are calibrated against ~50 known MCP servers in validation pass.
+# Each signal includes a `rationale` so users can argue with our methodology.
+
+schema_version: 0.1.0
+verdict_thresholds:
+  pass_min: 80
+  warn_min: 50
+
+signals:
+
+  # ===== A. Supply chain hygiene (target: ~40 of 100 deduction budget) =====
+  - id: A1_unpinned_deps
+    category: supply_chain
+    deduct: 3
+    rationale: "Heavy use of caret/tilde ranges (>70% of deps) inflates supply-chain surface. Calibrated down from v0.1 — caret is npm convention, so this fires only on heavy-use packages with >5 deps."
+
+  - id: A1b_dangerous_unpinned
+    category: supply_chain
+    deduct: 25
+    rationale: "Dependencies pinned at `*` or `latest` pull whatever was published most recently. Direct vector for worms — these should be hard-pinned."
+
+  - id: A2_postinstall_script
+    category: supply_chain
+    deduct: 25
+    rationale: "Lifecycle scripts run arbitrary code at install time on every developer machine. MCPwn-class vulnerabilities used this surface."
+
+  - id: A3_preinstall_or_prepack_with_download
+    category: supply_chain
+    deduct: 30
+    hard_block: true
+    rationale: "Scripts that fetch and execute remote content during install are textbook supply-chain attack — outright BLOCK."
+
+  - id: A4_no_provenance_attestation
+    category: supply_chain
+    deduct: 5
+    rationale: "npm provenance (--provenance) was introduced 2023 and ties packages to CI runs. Missing = harder to verify origin but not always malicious."
+
+  - id: A5_repo_url_missing_or_mismatched
+    category: supply_chain
+    deduct: 15
+    rationale: "If the package.json repository URL is absent or 404s, source-to-binary verification is impossible."
+
+  - id: A6_no_license
+    category: supply_chain
+    deduct: 10
+    rationale: "Unlicensed code is legally fragile to depend on; can also be a signal of low-care maintenance."
+
+  # ===== B. Maintainer health (target: ~20 of budget) =====
+  - id: B1_last_release_over_365d
+    category: maintainer
+    deduct: 18
+    rationale: "Abandoned packages don't get CVE patches; agents calling them inherit unfixed risk."
+
+  - id: B1b_last_release_180_to_365d
+    category: maintainer
+    deduct: 6
+    rationale: "Slowing release cadence — partial signal of declining maintenance."
+
+  - id: B2_single_maintainer
+    category: maintainer
+    deduct: 4
+    rationale: "Bus-factor of 1. If the single maintainer disappears or their npm account is compromised, no second pair of eyes."
+
+  - id: B3_repo_under_60d_old
+    category: maintainer
+    deduct: 8
+    rationale: "Very new repos have no track record; combined with high install count is unusual and warrants caution. Suppressed for self-disclosed packages (we eat our own dog food)."
+
+  - id: B4_github_last_push_over_365d
+    category: maintainer
+    deduct: 12
+    rationale: "Last GitHub push >365d shows the repo behind the npm package is effectively abandoned even if package.json times look recent."
+
+  - id: B5_repo_archived
+    category: maintainer
+    deduct: 20
+    rationale: "GitHub-archived repo means maintainer has explicitly declared they will not accept further fixes — installing is consciously accepting an end-of-life dependency."
+
+  # ===== C. Known vulnerabilities (target: ~25 of budget) =====
+  - id: C1_critical_cve_in_direct_deps
+    category: vulnerability
+    deduct: 35
+    hard_block: true
+    rationale: "Known CRITICAL CVE in a direct dependency is unambiguous — fix before installing."
+
+  - id: C2_high_cve_in_direct_deps
+    category: vulnerability
+    deduct: 20
+    rationale: "HIGH severity in direct deps may be exploitable depending on call paths; warrant warning."
+
+  - id: C3_high_or_critical_in_transitive
+    category: vulnerability
+    deduct: 12
+    rationale: "Transitive vulns harder to assess exploitability but still real risk."
+
+  - id: C4_name_typosquats_official
+    category: vulnerability
+    deduct: 40
+    hard_block: true
+    rationale: "Package name within edit-distance 2 of an @modelcontextprotocol/* official server (or other known official MCP brand) is a textbook supply-chain attack."
+
+  # ===== D. MCP-specific (target: ~15 of budget) =====
+  - id: D1_declares_fs_no_namespace
+    category: mcp_specific
+    deduct: 8
+    rationale: "MCP server with filesystem tools but no allowed-path restriction = full host FS access. Should be opt-in per directory."
+
+  - id: D2_declares_network_no_allowlist
+    category: mcp_specific
+    deduct: 8
+    rationale: "Network access without an allowed-hosts allowlist means agent + server can exfiltrate freely. Risk for env-stealer worms."
+
+  - id: D3_hardcoded_credentials_in_source
+    category: mcp_specific
+    deduct: 50
+    hard_block: true
+    rationale: "Hard-coded API keys / tokens / secrets in published source is unambiguous fail."
+
+  - id: D4_tools_schema_lies
+    category: mcp_specific
+    deduct: 6
+    rationale: "Declared tool name/description does not match implementation — could be misleading to the agent."
+
+# ===== Positive signals (additive, max +20) =====
+# Currently disabled in v0.1 — we score deductively only to avoid inflating
+# scores on well-known-but-still-risky packages. Will re-evaluate after
+# validation pass.

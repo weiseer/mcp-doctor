@@ -1,0 +1,83 @@
+name: 'mcp-doctor'
+description: 'Block dangerous MCP server installs in CI. Open-source rubric.'
+author: 'weiseer'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  packages:
+    description: 'Space-separated list of npm packages to scan'
+    required: false
+  config-path:
+    description: 'Path to claude_desktop_config.json or cline_config.json to scan'
+    required: false
+  policy:
+    description: "Failure policy: 'strict' (fail on any WARN+), 'block-only' (default — fail on BLOCK only), 'report' (never fail)"
+    required: false
+    default: 'block-only'
+  endpoint:
+    description: 'Custom mcp-doctor scan endpoint URL'
+    required: false
+    default: 'https://api.weiseer.com/mcp-doctor/scan'
+
+outputs:
+  results:
+    description: 'JSON array of scan results'
+  summary:
+    description: 'Human-readable summary'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run mcp-doctor scan
+      shell: bash
+      env:
+        MCP_DOCTOR_ENDPOINT: ${{ inputs.endpoint }}
+        MCP_DOCTOR_POLICY: ${{ inputs.policy }}
+        MCP_DOCTOR_PACKAGES: ${{ inputs.packages }}
+        MCP_DOCTOR_CONFIG: ${{ inputs.config-path }}
+      run: |
+        set -e
+        if [ -z "$MCP_DOCTOR_PACKAGES" ] && [ -z "$MCP_DOCTOR_CONFIG" ]; then
+          echo "::error::either 'packages' or 'config-path' is required"
+          exit 2
+        fi
+        ARGS=""
+        if [ -n "$MCP_DOCTOR_CONFIG" ]; then ARGS="$ARGS --config $MCP_DOCTOR_CONFIG"; fi
+        if [ -n "$MCP_DOCTOR_PACKAGES" ]; then ARGS="$ARGS $MCP_DOCTOR_PACKAGES"; fi
+        echo "running: npx -y @weiseer/mcp-doctor --json $ARGS"
+        npx -y @weiseer/mcp-doctor --json $ARGS > /tmp/mcp-doctor-results.json || true
+        RESULTS=$(cat /tmp/mcp-doctor-results.json)
+        echo "$RESULTS" > "${GITHUB_OUTPUT}.json"
+        # Build summary
+        node -e '
+          const results = JSON.parse(require("fs").readFileSync("/tmp/mcp-doctor-results.json","utf-8"));
+          const counts = results.reduce((a, r) => { a[r.verdict] = (a[r.verdict]||0) + 1; return a; }, {});
+          const blocks = results.filter(r => r.verdict === "BLOCK");
+          const warns = results.filter(r => r.verdict === "WARN");
+          let summary = `## mcp-doctor scan\n\nTotal: ${results.length}  ·  ${JSON.stringify(counts)}\n\n`;
+          if (blocks.length) {
+            summary += `### BLOCK\n` + blocks.map(r => `- **${r.package}@${r.version}** (score ${r.score})\n  ` + (r.triggered_signals.map(s => `- \`${s.signal_id}\`: ${s.evidence}`).join("\n  "))).join("\n") + "\n\n";
+          }
+          if (warns.length) {
+            summary += `### WARN\n` + warns.map(r => `- ${r.package}@${r.version} (score ${r.score})`).join("\n") + "\n";
+          }
+          require("fs").writeFileSync("/tmp/mcp-doctor-summary.md", summary);
+          process.stdout.write(summary);
+        '
+        # Write to job summary
+        cat /tmp/mcp-doctor-summary.md >> "$GITHUB_STEP_SUMMARY"
+        # Enforce policy
+        BLOCKS=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/mcp-doctor-results.json','utf-8')).filter(r=>r.verdict==='BLOCK').length)")
+        WARNS=$(node -e "console.log(JSON.parse(require('fs').readFileSync('/tmp/mcp-doctor-results.json','utf-8')).filter(r=>r.verdict==='WARN').length)")
+        case "$MCP_DOCTOR_POLICY" in
+          strict)
+            if [ "$BLOCKS" -gt 0 ] || [ "$WARNS" -gt 0 ]; then echo "::error::policy=strict and found $BLOCKS BLOCK + $WARNS WARN"; exit 1; fi ;;
+          block-only)
+            if [ "$BLOCKS" -gt 0 ]; then echo "::error::policy=block-only and found $BLOCKS BLOCK"; exit 1; fi ;;
+          report)
+            echo "::notice::policy=report (never fail)" ;;
+          *)
+            echo "::error::unknown policy: $MCP_DOCTOR_POLICY"; exit 2 ;;
+        esac
