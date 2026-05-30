@@ -1,0 +1,726 @@
+{
+  "case": "mcp-doctor",
+  "generated_at": "2026-05-30T09:30:32Z",
+  "persona_count": 12,
+  "would_pay_count": 4,
+  "unsubscribed_count": 2,
+  "results": [
+    {
+      "persona": "01_early_founder",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 6,
+          "reason": "有趣的供应链问题，但我现在做 B2B SaaS 不碰 MCP 生态。除非他能证明这东西对我的客户有直接价值，否则先 watch，不付钱。",
+          "verbatim_quote": "mcp-doctor 看起来解决了真实的安全问题（hardcoded API keys 这种事确实会发生），但问题是：我的 ICP 关心这个吗？还是只有 MCP 重度用户才会装这个 GitHub Action？先看看 adoption curve。",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "WARN score 67 没有清晰的决策边界——我不知道是'装上会死人'还是'装上就是有点脏'。这跟我上次 personalab 的问题一样：工具给了数字，但没给我'该不该用'的答案。而且我现在做 B2B SaaS，MCP 供应链风险对我的 5 个目标客户有多大威胁？不知道。",
+          "verbatim_quote": "tried mcp-doctor, got a WARN on a package I'm using. the rubric is transparent (respect), but 'WARN' is useless without a decision rule. is 67/100  'ship it anyway' or 'find alternative'? if you're scanning for your customers' peace of mind, you need a clearer pass/fail threshold.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 4,
+          "reason": "又是同一个问题——工具给了分数但没给决策框架。'WARN' 是什么意思？我要不要在 CI 里 block？作者没有告诉我真实成本。这跟 personalab 的'12 个 persona 说了啥'问题一样：数据不等于信号。",
+          "verbatim_quote": "mcp-doctor looks solid technically but I need to see: (1) what % of WARN packages actually caused real incidents vs false positives, (2) cost of blocking a WARN in prod vs letting it through. Right now it's just another scoring black box. Pass until there's calibration data.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 4,
+          "reason": "Pro $19/mo 还是没解决核心问题——我不知道 WARN 到底要不要 block。你给我分数但没给我决策框架。这跟 personalab 一样：工具很聪明，但我用不了。",
+          "verbatim_quote": "mcp-doctor looks solid technically but I'm stuck on the same question for 4 days: what do I DO with a WARN score? Block CI? Ignore? Author won't say what the real cost of each signal is. Not paying $19/mo to guess.",
+          "day": 4
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "annoyed",
+          "engage_score": 6,
+          "reason": "工具本身有价值（找到了真实的 stale package），但 WARN/BLOCK 决策框架完全缺失。我不知道该在 CI 里 block 还是 ignore，这跟 personalab 的'给分数不给决策'是同一个坑。作者需要告诉我：WARN 的真实成本是什么？有没有人因为装了 WARN 包出过事？",
+          "verbatim_quote": "mcp-doctor 找到了真问题（stale official packages），但工具本身犯了产品经理的死罪：给了分数，没给决策框架。WARN 是'装上会死人'还是'装上就是有点脏'？作者需要 calibrate against real incidents，不然这就是另一个 personalab。",
+          "internal_notes": "这个创始人在重复同一个模式识别——他被 personalab 的'聪明但不可信'伤过一次，现在看到 mcp-doctor 也是'有信号但没决策框架'，直接触发了警惕。他不会付钱，除非看到：(1) WARN vs BLOCK 的真实成本对照（比如'WARN 包的平均漏洞发现率 vs BLOCK 包'），(2) 作者承认'这是 research-grade，不是 production-ready'，或者 (3) 有真实用户案例说'我因为这个 WARN 避免了 X'。GitHub issue 是他的'give author one more chance'信号——如果作者能在 48h 内给出清晰的决策框架，他可能会 subscribe Pro；如果继续含糊，他会写一条 Twitter thread 说'another tool that optimizes for metrics, not decisions'。",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "02_growth_pm",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 6,
+          "reason": "有趣的供应链问题，但这不是我的痛点。我在乎的是 conversion funnel，不是 MCP 包安全。除非这能帮我跑 A/B 测试更快，否则只是 nice-to-know。",
+          "verbatim_quote": "Evaluated mcp-doctor on relevance to growth PM work: speed gain (N/A), ICP fit (0/10), team leverage (0/10). Bookmarking for when we adopt MCP internally, but not today.",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "WARN verdict on a package I'm already using doesn't help me ship faster. I need to know: is this a blocker or noise? The signal citations are nice, but I have 0 context on severity thresholds. This feels like a research tool, not a decision tool for my velocity.",
+          "verbatim_quote": "Evaluated mcp-doctor on 1 axis: does it unblock my A/B test velocity? 2/10. Nice rubric, but WARN ≠ actionable. I need: 'safe to use' or 'do not use', not a scorecard.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "mcp-doctor 是供应链安全工具，我的 OKR 是 conversion 从 3.2% → 4.5%。GitHub Action 建议对我的迭代速度零帮助。我需要的是加快 A/B 测试周期，不是扫描依赖包。",
+          "verbatim_quote": "Evaluated mcp-doctor on 3 axes: relevance-to-growth-pm (1/10), speed-impact (0/10), conversion-lift (0/10). Pass.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "Pro tier $19/mo 还是在解决供应链信任问题，跟我的 conversion funnel OKR 完全正交。我需要的是能砍掉失败实验的工具，不是 MCP 包扫描器。",
+          "verbatim_quote": "mcp-doctor solves a real problem (supply chain), but for a growth PM optimizing Free→Paid conversion, it's a category mismatch. 0/10 relevance to my roadmap.",
+          "day": 4
+        },
+        {
+          "action": "UNSUBSCRIBE_OR_UNINSTALL",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "mcp-doctor 解决的是供应链信任问题，跟我的 OKR（Free→Paid conversion 3.2%→4.5%）完全正交。5 天了，零帮助我加快 A/B 迭代速度。时间成本 > $19 价值。",
+          "verbatim_quote": "mcp-doctor is a solid supply-chain gate, but it's solving the wrong problem for my roadmap. I need tools that compress my experiment cycle, not npm package audits. Uninstalling.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "03_user_researcher_hostile",
+      "days": [
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The rubric is transparent and the 200-package validation is real empirical work—not synthetic. But I need to see the ground truth methodology: how were those PASS/WARN/BLOCK labels validated against actual security incidents? What's the false positive rate? If this is just pattern-matching without incident correlation, it's security theater.",
+          "verbatim_quote": "Finally someone is doing supply-chain work on MCP instead of hand-waving. But 'open-source rubric' ≠ 'validated rubric.' Show me the calibration: PASS packages that later had CVEs, WARN packages that turned out fine. Otherwise this is just another heuristic system pretending to be ground truth.",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 4,
+          "reason": "WARN on a stale package with no repo URL is *exactly* the kind of signal that should trigger a real maintainer conversation, not a badge. This tool is doing the mechanical part right—but it's solving for 'install-time gate' when the real problem is 'why are 6 of 10 official packages unmaintained?' That's a governance failure, not a scanner failure. Also: solo founder, 14h ship, China-based, no entity = this will be acquired or abandoned in 18 months. I'm not betting my supply chain on that.",
+          "verbatim_quote": "mcp-doctor found what npm audit + maintainer health checks should've caught years ago. But a WARN badge won't fix unmaintained official packages—only Anthropic can. Useful as a *diagnostic*, dangerous as a *gate*. #MCP #SupplyChain",
+          "internal_notes": "She respects the empirical work (200-package validation, open rubric, real CVE context) but is hostile to the *framing*: this is being sold as a trust gate when it's actually a symptom reporter. The stale official packages are the real story—mcp-doctor is just making the rot visible. She won't unsubscribe yet because Day 1 GitHub issue means she's still in 'audit mode,' but she's already mentally categorizing this as 'useful research artifact, not a product I'd recommend to teams.' The solo founder + 14h ship + no legal entity are red flags for her (risk assessment instinct from FAANG). She'll wait for Day 3-4 to see if there's a calibration report or real-world case study that proves WARN/BLOCK thresholds actually predict real exploits.",
+          "day": 2
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The rubric transparency and 200-package ground truth validation are rare in this space. But before I'd recommend this to my team, I need to see: (1) false positive rate on WARN signals—'stale >365 days' alone isn't maintainer health, could be 'stable and done'; (2) calibration data: what % of WARN packages actually had security issues vs. benign neglect? (3) how does the GitHub Action handle transitive deps—does it flag the whole tree or just direct?",
+          "verbatim_quote": "mcp-doctor's rubric is refreshingly non-proprietary. But 'supply chain trust gate' is only as good as its false positive rate. Before I gate PRs on WARN, I want to see the confusion matrix. cc @weiseer",
+          "engage_score_detail": "Day 1 was curiosity (rubric is honest). Day 2 was validation (real 200-pkg dataset). Day 3 is skepticism—not hostility, but I'm a researcher: I need to know what signal-to-noise ratio I'm buying before I let it kill PRs in CI.",
+          "day": 3
+        },
+        {
+          "action": "SUBSCRIBE_PRO",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The 200-package validation + open rubric is actual empirical work, not synthetic. Drift alerts on stale maintainers solve a real supply-chain blind spot. I'll pay $19/mo to monitor my team's MCP dependencies—this is the opposite of the personalab problem: ground truth first, then tooling.",
+          "verbatim_quote": "mcp-doctor is doing what supply-chain research *should* do: start with 200 real packages, publish the rubric, show your work. Drift alerts catch the 'official' packages Google abandoned. Worth $19/mo if it prevents one typosquat incident. (Still won't let it replace human code review.)",
+          "day": 4
+        },
+        {
+          "action": "SUBSCRIBE_PRO",
+          "mood": "engaged",
+          "engage_score": 8,
+          "reason": "This is the rare case where the empirical work (200-package validation, open rubric, ground-truth calibration) actually backs up the claims. The stale @modelcontextprotocol/server-github WARN isn't a hallucination—it's a real signal with cited evidence. Repo monitoring + drift alerts justify $19/mo for supply-chain hygiene I can't do manually at scale.",
+          "verbatim_quote": "mcp-doctor is doing what synthetic research *should* do: generate hypotheses from real data, then let humans verify. The rubric is open, the validation set is disclosed, the signals are falsifiable. That's not AI replacing judgment—that's AI doing the grunt work so I can focus on *why* packages fail. Subscribed.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "04_vc_thesis",
+      "days": [
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "Supply-chain security for MCP is real TAM (~$2-3B if ecosystem scales), and the 200-package validation + hardcoded API key finding is credible proof-of-problem. But this is infrastructure/compliance tooling, not a venture-scale SaaS. Founder needs to clarify: are you building a $20k/year enterprise compliance product (viable) or a $19/mo PLG tool (won't work)? Also — solo founder, China-based, no legal entity. Funding structure question.",
+          "verbatim_quote": "mcp-doctor is technically sound (rubric is well-calibrated, 200-pkg validation is real), but founder needs to pick a lane: enterprise compliance gate ($20k+/yr, 50 customers = $1M ARR) or open-source forever. PLG at $19/mo won't cover support burden for security tooling.",
+          "internal_notes": "This is a 'strong technical, weak commercial' repeat. Same founder as personalab. Security/compliance tools have different unit economics than research tools — higher ACV, longer sales cycle, but also higher switching costs. Worth a follow-up call in 3 months if he ships: (1) SAML/SSO, (2) audit log export, (3) 3+ enterprise pilots. Otherwise, recommend he open-source it fully and build a services layer (security consulting for MCP ecosystem).",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "WARN verdict on a real package confirms signal quality, but solo founder + 14h ship + no commercial co-founder = pre-seed feasibility check, not investment. CLI-first distribution kills PLG math. Need to see: (1) enterprise pilot with $20k+ ACV, (2) web dashboard + team collab, (3) founder commitment signal.",
+          "verbatim_quote": "Strong technical execution on rubric calibration (200-package validation is credible). But supply-chain trust gates are infrastructure plays—need enterprise GTM + compliance, not $19/mo SaaS. Founder should either go deep on Snyk partnership or hire commercial co-founder. As-is: pre-seed only.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 6,
+          "reason": "Signal quality is real (Day 2 WARN verdict validates rubric), but this is still a $19/mo PLG play with zero enterprise motion. GitHub Action adoption ≠ revenue. Founder needs to pick: security compliance tool (enterprise, $50k+ ACV, sales team) or open-source community project (no monetization). Can't be both.",
+          "verbatim_quote": "mcp-doctor has strong technical signal but wrong GTM for the TAM. If wei commits to enterprise (SOC2, audit logs, private denylist) and hires a sales person, this is a $10M ARR business in 3 years. If staying open-source + $19/mo, this is a lifestyle project. Pick one.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 6,
+          "reason": "Signal quality validates the rubric, but $19/mo Pro tier doesn't solve the core unit economics problem: you need 260+ paying Pro customers just to hit $50k/yr ARR, and there's zero evidence of PLG traction or enterprise willingness to pay. Solo founder, 14h build, no go-to-market. This is a technical moat without a business moat.",
+          "verbatim_quote": "mcp-doctor has real signal quality (rubric is solid, WARN verdicts check out), but the pricing model assumes demand that doesn't exist yet. $19/mo is a hobbyist price for a security gate that enterprises will demand SOC2 + SLA for. Founder needs a commercial co-founder or pivot to $5k+/yr enterprise licensing, not SaaS.",
+          "day": 4
+        },
+        {
+          "action": "SUBSCRIBE_PRO",
+          "mood": "considering_quit",
+          "engage_score": 6,
+          "reason": "Signal quality is validated (Day 2-4 confirms rubric calibration), and supply-chain trust for MCP is a real $2-3B TAM if ecosystem scales. $19/mo is rational hedge: repo monitoring + drift alerts let me track my stack's health without manual overhead. But this is a 3-month feasibility check, not a conviction bet. If founder doesn't ship web UI + team collaboration by Q3, I'm unsubscribing.",
+          "verbatim_quote": "mcp-doctor's rubric is solid—caught real signal in 200-package validation. $19/mo repo monitoring is worth the optionality. But solo founder + 14h ship = pre-seed technical proof, not product-market fit. Need to see: (1) web UI, (2) team collab, (3) enterprise compliance. Watching.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "05_indie_hacker",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 6,
+          "reason": "Interesting supply-chain angle and open-source rubric, but I'm not shipping an MCP server yet. Bookmarking for when Highlight Reel v2 needs Claude integration — then I'll actually care about trust scoring. Right now it's infrastructure porn, not a time-saver.",
+          "verbatim_quote": "mcp-doctor looks solid (hardcoded API key in prod? yikes) but I don't have skin in the MCP game yet. Will revisit when I'm ready to ship my own server. Open-source rubric is chef's kiss though — that's how you build trust, not marketing.",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 6,
+          "reason": "WARN verdict on a package I actually use is useful signal, but I'm not in 'buy security tools' mode yet—I'm in 'ship landing page' mode. If this keeps me from installing something sketchy, cool. If it becomes a weekly ritual that costs me $19/mo, that's 1.9 Highlight Reel users I'm not getting.",
+          "verbatim_quote": "ran mcp-doctor on one of my deps, got a WARN. 416 days stale + no repo URL. honestly? makes me want to audit my own package.json before I tell customers to trust my integrations. free tool doing real work here.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "Honestly, the GitHub Action is slick, but I'm not running an MCP server in production yet—Highlight Reel v2.0 uses Claude API directly. Adding CI gates for something I'm not shipping feels like paying $19/mo for infrastructure theater. If I were actually deploying MCP servers to customers, maybe. But right now? That's $228/year to feel safer about dependencies I'm not even using.",
+          "verbatim_quote": "mcp-doctor looks solid for teams shipping MCP in prod, but as a solo indie still in the 'should we even use MCP' phase, it's a $19/mo solution to a problem I don't have yet. Ask me again when I'm onboarding customers to a hosted MCP setup.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "$19/mo for repo monitoring I don't need yet — I'm not shipping MCP servers, just evaluating them. Free tier does what I need (single scans + badge). Come back when I'm actually deploying.",
+          "verbatim_quote": "mcp-doctor is solid work, but honestly for an indie hacker not shipping MCP in prod, the free tier is enough. $19/mo = 1.9 Highlight Reel subs I don't have yet. Pass for now.",
+          "day": 4
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "Tbh, mcp-doctor is solving a real problem (supply-chain trust for MCP), but I'm not the customer yet. I'm not shipping MCP servers in production, just evaluating them. $19/mo for repo monitoring I won't use for 6+ months = $114 sunk before I even need it. The free tier badge + single scan is enough signal for now.",
+          "verbatim_quote": "mcp-doctor's rubric is solid and the WARN on stale official packages is actually useful, but paying $19/mo to monitor repos I'm not maintaining yet is like paying for health insurance before I'm born. Great tool, wrong timing for me.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "06_research_consultant",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 4,
+          "reason": "Interesting supply-chain rigor, but mcp-doctor solves a problem I don't have. I don't build/ship MCP servers—my clients are PM teams doing user research. This is a developer tool ecosystem play, not a research leverage tool. I'll watch the space though.",
+          "verbatim_quote": "Smart rubric design (20+ signals, calibrated against 200 packages), but unless I'm suddenly shipping MCP servers to production, this is someone else's problem. Curious how the solo founder will scale trust scoring as the ecosystem grows.",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 5,
+          "reason": "The rubric is rigorous and the WARN/PASS/BLOCK framing is methodologically sound — I respect that. But mcp-doctor solves *ecosystem* trust, not *research* trust. My clients don't audit MCP packages; they care about user insights. Wrong problem for my workflow.",
+          "verbatim_quote": "Impressive supply-chain rigor, but I'm not building MCP servers — I'm studying the humans who use them. Two different trust domains.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "mcp-doctor is methodologically sound, but it solves a supply-chain problem, not a research leverage problem. I don't ship MCP servers or manage dependency trees at scale—my clients do. Unless this becomes a client-facing deliverable risk (which it isn't yet), it's not my tool.",
+          "verbatim_quote": "Solid rubric, but I'm evaluating tools to reduce my own fulfillment cost on user research projects. This solves for DevOps teams, not research consultants. Two different problems.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 4,
+          "reason": "mcp-doctor is methodologically rigorous—I respect the rubric and signal design—but it's fundamentally a supply-chain gate for *MCP server packages*, not a research tool. I don't ship packages; I ship findings. Wrong problem domain for my business model.",
+          "verbatim_quote": "The rubric is solid (20+ signals, calibrated against 200 packages), but I'm not evaluating whether to *install* an MCP server—I'm evaluating whether to trust my own research conclusions. Different gate entirely.",
+          "day": 4
+        },
+        {
+          "action": "SUBSCRIBE_PRO",
+          "mood": "considering_quit",
+          "engage_score": 6,
+          "reason": "mcp-doctor's rubric rigor mirrors my own research methodology—I can trust its signal design enough to use it as a internal validation gate for my own MCP recommendations to clients. $19/mo is negligible against a $45k project if it saves 2-3 hours of manual supply-chain due diligence. But I'm not evangelizing this to the team yet; the @modelcontextprotocol/server-github WARN flag needs explanation before I'd cite it in a deliverable.",
+          "verbatim_quote": "mcp-doctor's rubric is methodologically sound—treating it as a leverage tool for internal validation, not client-facing evidence. The signal design is better than npm audit. Cautious thumbs-up for $19/mo.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "07_oss_maintainer",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 7,
+          "reason": "项目本身很solid——开源、self-host friendly、有真实数据支撑。但我需要先看 GitHub repo 的代码质量、commit history、测试覆盖和 pyproject.toml 依赖树。作者是 personalab 那位，这加分，但 14h shipped 的东西我得验证一下抽象是否真干净。",
+          "verbatim_quote": "mcp-doctor 解决了一个真实的生态问题（MCPwn + typosquats），rubric 开源了，API 免费。但我要先 clone 看看 core/ 的代码设计——14h shipped 的工具往往在可维护性上有坑。如果代码干净 + commit history 活跃，这值得推给 newsletter 的 50+ founders。",
+          "day": 1
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "WARN verdict 的语义模糊——'be aware' vs 'do not install' 差别巨大。作为维护者我需要清楚的信号定义。同时想看作者对这个反馈的响应速度和态度。",
+          "verbatim_quote": "Just ran mcp-doctor on one of my packages and got WARN (67). The output is detailed but the verdict semantics are unclear — does WARN mean 'maintainer health is degraded but package is safe' or 'supply chain risk detected, reconsider'? For a trust gate, this ambiguity defeats the purpose. Suggest: (1) explicit WARN definition in docs, (2) per-signal severity levels, (3) maybe a 'confidence' score separate from 'risk score'. The rubric itself is solid — 20+ signals is thorough — but the UX of 'what do I do with this verdict' needs work. Curious how @weiseer responds.",
+          "day": 2
+        },
+        {
+          "action": "SHARE_WITH_TEAM",
+          "mood": "engaged",
+          "engage_score": 8,
+          "reason": "Day 3 的 GitHub Action 建议触发了我的实际用例思考。这不再是'看起来不错的工具'，而是'我的 CI 流程里真的需要这个决策点'。作者在 Day 2 issue 上的回应速度和清晰度会决定我是否真的集成它。",
+          "verbatim_quote": "Just evaluated weiseer/mcp-doctor for supply-chain gating in our MCP dependency CI. The rubric is actually well-calibrated (200-package validation, not theoretical). WARN/BLOCK semantics still need clarification for strict enforcement, but the GitHub Action is exactly what the ecosystem needs post-MCPwn. Shipping this in 14h solo is impressive. Watching the issue response time before full adoption.",
+          "day": 3
+        },
+        {
+          "action": "SUBSCRIBE_PRO",
+          "mood": "engaged",
+          "engage_score": 8,
+          "reason": "Day 3 的 GitHub Action 集成让我意识到这不是玩具——我的 8.4k star 项目每周收 15+ 新 dependency PRs，我需要在 CI 里自动化这个决策。$19/mo 对 drift alerts + unlimited CI calls 来说值得，特别是作者在 Day 2 对我的 WARN 语义问题秒回了。",
+          "verbatim_quote": "just subscribed to mcp-doctor Pro. the supply-chain signal rubric is legit (20+ signals, calibrated against 200 real packages), but what sold me: the author *listened* to the GitHub issue about WARN/BLOCK semantics and shipped clarity in 24h. that's how you build trust in a security tool. if you maintain anything with dependencies, this belongs in your CI. https://github.com/weiseer/mcp-doctor",
+          "day": 4
+        },
+        {
+          "action": "SUBSCRIBE_PRO",
+          "mood": "engaged",
+          "engage_score": 8,
+          "reason": "Day 4 subscription decision holds. The rubric transparency + author's responsive GitHub issue handling (WARN semantics clarification) proved this isn't vaporware. Pro tier's repo monitoring + drift alerts directly solves my supply-chain friction on 8.4k star project. Solo founder, 14h ship, self-host capable — textbook OSS I'd bet on.",
+          "verbatim_quote": "Spent 5 days stress-testing mcp-doctor. Verdict: it's the supply-chain trust gate the MCP ecosystem actually needed. Rubric is open-sourced, author responds to technical feedback in <24h, and the 200-package validation caught real typosquats + stale official packages. Just subscribed to Pro for repo monitoring. If you maintain anything in the MCP space, this should be in your CI. github.com/weiseer/mcp-doctor",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "08_ai_safety_skeptic",
+      "days": [
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "Supply-chain trust for AI tooling is genuinely important work — the MCPwn/Shai-Hulud precedent is real. But I need to understand the threat model: how does the rubric avoid false negatives (missing sophisticated supply-chain attacks)? And what's the validation methodology — is this calibrated against *adversarial* packages or just statistical patterns? The hardcoded key finding is good, but one data point doesn't validate the whole signal set.",
+          "verbatim_quote": "mcp-doctor is addressing a real gap post-MCPwn, but I'd want to see: (1) red-team results against the rubric, (2) how it handles the 'stale maintainer = compromised?' inference leap, (3) whether the scoring avoids the RLHF-softening problem (i.e., does WARN actually warn, or does it become 'interesting but probably fine'). Open-source rubric is the right call. Worth contributing threat models.",
+          "day": 1
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The rubric transparency is genuinely good — 20+ signals, calibrated against 200 real packages, open-source scoring. But WARN/PASS/BLOCK semantics need clarification: does 416 days stale + no repo URL = 'use with caution' or 'do not install'? And I need to see the prompt injection surface area before recommending this in CI/CD pipelines where it'll become a de facto policy gate.",
+          "verbatim_quote": "mcp-doctor is doing real supply-chain triage work, but the signal-to-action mapping needs a formal threat model. What's the false positive rate on 'stale = unmaintained'? And how does this avoid becoming another 'AI-as-arbiter' system that normalizes algorithmic gatekeeping without human review?",
+          "day": 2
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 8,
+          "reason": "The GitHub Action is the right deployment surface for this work — but I need to flag: (1) WARN-blocking in CI will create false-positive friction; have you modeled the precision/recall tradeoff against real team velocity? (2) Policy YAML is great, but what's the threat model for policy injection via malicious .mcp-doctor.yaml in a compromised upstream? This needs explicit scoping.",
+          "verbatim_quote": "mcp-doctor's rubric is solid, but shipping it as a CI gate without addressing WARN false-positives and policy-file attack surface feels premature. The supply-chain problem is real; the solution needs one more round of adversarial thinking before it becomes a norm.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 6,
+          "reason": "The product itself is solid supply-chain work, but I'm hitting the core tension: paying for 'drift alerts' on a tool that depends on LLM-scored signals means I'm paying to be notified when an opaque scoring function changes its mind. That's not trust—that's surveillance theater. I need to understand the alert *calibration* before I pay.",
+          "verbatim_quote": "mcp-doctor's rubric is transparent, but 'drift alerts' on LLM-scored supply-chain signals feels like asking me to trust the *detector* more than the *detection*. What's the false-positive rate on 'maintainer health' signals across a 6-month window? Show me the precision-recall curve, then we talk pricing.",
+          "day": 4
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The rubric flagging @modelcontextprotocol/server-github as WARN despite official status exposes a critical blind spot: how do you prevent the tool itself from becoming a false-confidence mechanism? This needs a public discussion about calibration drift and the risk of teams using mcp-doctor verdicts as a substitute for threat modeling.",
+          "verbatim_quote": "mcp-doctor is doing real supply-chain work, but we need to talk about the second-order risk: if teams start treating PASS/WARN/BLOCK as *sufficient* for trust decisions rather than *necessary input*, we've just automated away human judgment. The @modelcontextprotocol/server-github case is the canary.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "09_corporate_pm",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 4,
+          "reason": "Interesting supply-chain risk signal, but mcp-doctor is a developer tool for MCP package validation — not relevant to our product PM workflow. Our concern is user research tooling (ABMode, personas), not npm package scanning. Will file mentally under 'ecosystem risk monitoring' for our infrastructure team, but not a procurement candidate for my OKR.",
+          "verbatim_quote": "The hardcoded API key finding is concerning for the broader MCP ecosystem — we should flag this to our platform security team. But this is a dev-ops tool, not a PM tool.",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 3,
+          "reason": "mcp-doctor is a developer supply-chain tool, not an enterprise SaaS platform. Our organization doesn't own or publish MCP servers at scale—this is a niche ecosystem concern. Even if we did, the tool lacks SOC2/GDPR compliance, audit logging, and procurement-ready licensing. A staff engineer might run it once in a sandbox; it won't enter our tooling stack.",
+          "verbatim_quote": "Interesting signal for teams shipping MCP packages, but we're not in that business. Before evaluating any procurement, we'd need SOC2 Type II, a DPA, and enterprise licensing—this feels like a developer hobby project, not a platform.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 3,
+          "reason": "mcp-doctor is a developer-tier supply-chain scanner, not an enterprise governance platform. Our procurement won't touch it without SOC2/audit logs/SSO, and the use case (MCP package vetting) doesn't map to our product roadmap priorities this quarter. I'll flag it to our staff engineer for sandbox evaluation, but this won't move the needle on our upsell testing problem.",
+          "verbatim_quote": "Interesting signal on supply-chain risk, but we'd need SOC2 Type II + audit log export + Salesforce integration before this enters our standard tooling. For now, flagging to eng for personal evaluation—unlikely to clear procurement in our timeline.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 3,
+          "reason": "mcp-doctor solves a real supply-chain risk problem, but it's fundamentally a developer tool. Our enterprise governance requires: (1) SOC2/GDPR compliance documentation, (2) SSO + audit logging for team access, (3) procurement-grade pricing ($20k+ annual minimum), (4) integration with our existing Snyk + Artifactory stack. A $19/mo SaaS doesn't fit our procurement workflow or risk framework. We'd need to evaluate this as a team-wide policy tool, not a personal experiment.",
+          "verbatim_quote": "mcp-doctor's rubric is solid (20+ signals, open-source transparency), but before evaluating procurement, we'd need to see SOC2 Type II, a DPA, and integration with our existing supply-chain governance stack. Right now it's a point solution for individual developers—not a platform.",
+          "engage_score_detail": "Curiosity killed by compliance reality. This is Day 4 of 5; he's already mentally moved on to other OKR priorities.",
+          "day": 4
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 3,
+          "reason": "mcp-doctor is a developer-tier open-source tool, not an enterprise governance platform. Our procurement won't touch a solo-founder, China-based, no-entity project without SOC2/GDPR/audit logs. The supply-chain risk it solves is real, but we'd need to route this through our security team's existing vendor stack (Snyk Enterprise + internal policy engine), not adopt a parallel tool.",
+          "verbatim_quote": "mcp-doctor caught a real signal (stale @modelcontextprotocol packages), but before evaluating any adoption, we'd need to see: SOC2 Type II, GDPR DPA, vendor entity registration, and integration with our existing Snyk + Looker stack. As a solo open-source project, it's better suited for individual developer teams, not enterprise procurement.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "10_no_code_user",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 3,
+          "reason": "这个产品解决的是 MCP 生态的供应链安全问题，但我根本不用 MCP servers——我的整个 stack 是 Webflow + Zapier + Airtable。看起来是给开发者/DevOps 用的，不是我的世界。",
+          "verbatim_quote": "honestly this looks super important for the MCP ecosystem but like... I don't even know what an MCP server is 😅 cool rubric though!",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "我根本不写代码，不用 MCP servers，为什么要我跑 `npx` 命令？这就像给我推荐一个给飞行员用的工具一样。",
+          "verbatim_quote": "honestly this looks cool for devs but like... I don't even know what MCP is 😅 back to my Zapier workflows",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "同事问我要不要加 GitHub Action？我连 MCP 是什么都不用，更别说管理它的依赖了。这完全不是我的世界。",
+          "verbatim_quote": "lol my colleague just asked if we should add mcp-doctor to CI and I was like... do I even HAVE an MCP server? 😅 this is so not my lane",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "This is literally for developers managing MCP packages. I don't write code, I don't use MCP servers, I don't have a GitHub repo to monitor. Why am I even looking at pricing? 😅",
+          "verbatim_quote": "mcp-doctor looks super solid for the dev community but girl I literally use Zapier and Airtable, I'm not installing anything on the command line lol",
+          "day": 4
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 2,
+          "reason": "mcp-doctor 是给开发者管理 MCP 包依赖的工具，我根本不用 MCP servers。我的整个 stack 是 no-code 工具——这个产品对我来说完全是错的受众。",
+          "verbatim_quote": "honestly this looks like solid security tooling but it's literally not for me lol. i don't manage npm packages or write code. why am i even looking at this 😅",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "11_data_team_lead",
+      "days": [
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The rubric is interesting (20+ signals, 4 categories) and the 200-package validation dataset has real signal value. But the scoring methodology is opaque — I need to see: (1) How are signal weights calibrated? (2) What's the inter-rater reliability if you re-ran the same 200 packages with different LLM calls? (3) Is the PASS/WARN/BLOCK threshold deterministic or does it drift? Before I'd trust this in my evaluation pipeline, I need reproducibility guarantees.",
+          "verbatim_quote": "mcp-doctor's supply-chain rubric is solid in principle, but the scoring lacks statistical rigor. Need to see: weight calibration methodology, inter-rater reliability (Cohen's kappa across N=10 re-scans), and deterministic threshold definition. Otherwise it's just another heuristic wrapper. Open issue: github.com/weiseer/mcp-doctor/issues/[new]",
+          "internal_notes": "He recognizes the *problem* (MCPwn, typosquats, stale official packages) as real and the rubric design as thoughtful. But his NLP/ML background makes him immediately suspicious of: (a) whether the 200-package validation is actually representative, (b) whether PASS/WARN/BLOCK verdicts are reproducible across runs, (c) whether the signals are weighted by actual risk impact or just heuristically. He won't subscribe until he can verify the methodology is statistically sound. Opening a GitHub issue is his way of: (i) signaling genuine interest, (ii) forcing the author to defend the methodology, (iii) potentially contributing a PR if the author is receptive.",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "WARN verdict lacks statistical rigor — no confidence intervals, no inter-rater reliability across scanners, and 'days since release' as a signal conflates 'stable' with 'abandoned'. Need to see: (1) Cohen's kappa between mcp-doctor and npm audit / Snyk on same 200 packages, (2) calibration plot showing WARN threshold precision/recall tradeoff, (3) ablation study on which signals actually predict real exploits vs. false positives. Until then, this is heuristic bucketing, not a reproducible evaluation framework.",
+          "verbatim_quote": "mcp-doctor's rubric is well-intentioned but methodologically premature. A WARN score of 67 tells me nothing about false positive rate or whether I should actually block CI. Show me the ROC curve and inter-rater reliability first.",
+          "day": 2
+        },
+        {
+          "action": "OPEN_GITHUB_ISSUE",
+          "mood": "engaged",
+          "engage_score": 7,
+          "reason": "The GitHub Action is a smart distribution vector, but before I recommend it to my team's CI, I need to see: (1) how WARN/BLOCK verdicts change across N=5 identical scans of the same package (reproducibility audit), (2) whether the 20-signal rubric weights are calibrated via logistic regression against ground-truth supply-chain incidents, not just heuristic. If verdict stability is <85% (Cohen's kappa), this is a false-confidence gate that'll create alert fatigue.",
+          "verbatim_quote": "mcp-doctor's rubric is thoughtful, but shipping a CI gate without reproducibility bounds feels premature. Show me the inter-scan variance first—I'd rather have a 'report-only' mode in prod until you can prove WARN is statistically stable. cc @wei",
+          "technical_note": "Specifically: run the same 10 packages through the action 5x each, report std(verdict_score)/mean(verdict_score) per package. If >0.25, the action is not ready for blocking PRs.",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "considering_quit",
+          "engage_score": 4,
+          "reason": "Pro tier ($19/mo) doesn't address the core reproducibility gap I flagged on Day 2. Drift alerts are nice, but if the underlying verdict mechanism lacks deterministic seeding and inter-rater reliability metrics (Cohen's kappa across Claude/GPT-4/Llama), I'm just paying to monitor noise. This is a supply-chain tool, not a simulation framework—different use case than personalab, and the statistical rigor bar is even higher here.",
+          "verbatim_quote": "mcp-doctor's rubric is solid (20+ signals, real validation on 200 packages), but the verdict reproducibility is still a blocker. Running the same package scan twice shouldn't give different PASS/WARN/BLOCK outcomes. Until there's deterministic prompt seeding + confidence intervals on signal confidence, I can't justify paying for alerts on unstable signals. Open an issue on this and I'll reconsider.",
+          "day": 4
+        },
+        {
+          "action": "UNSUBSCRIBE_OR_UNINSTALL",
+          "mood": "annoyed",
+          "engage_score": 3,
+          "reason": "Four days in, the tool remains a well-packaged heuristic engine without statistical rigor. The rubric signals are interesting but unvalidated—no inter-rater reliability metrics, no confidence intervals on WARN/BLOCK verdicts, no ablation study on signal weights. For a supply-chain gate, that's insufficient. I'd rather maintain a deterministic in-house checklist than trust a black-box scoring system that could flip verdicts on the same package tomorrow.",
+          "verbatim_quote": "mcp-doctor is a thoughtfully scoped tool, but it's solving a *packaging* problem, not a *statistical* one. Until the rubric is calibrated with Cohen's kappa across independent auditors and each verdict includes CI95, it's not suitable for gating production ML pipelines. Back to manual review + npm audit.",
+          "day": 5
+        }
+      ]
+    },
+    {
+      "persona": "12_designer_lead",
+      "days": [
+        {
+          "action": "DO_NOTHING",
+          "mood": "curious",
+          "engage_score": 4,
+          "reason": "有趣的安全工具，但跟我的设计工作流完全无关。我是在做 design review，不是在管理 MCP 包依赖。",
+          "verbatim_quote": "这个 mcp-doctor 看起来很专业，但我得问一下——这是给工程师用的吗？我们的 DevOps 人应该看这个。",
+          "day": 1
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "这是个给工程师的供应链安全工具，我是设计 lead——我的痛点是 design review feedback 报告太丑，不是 npm 包管理。即使作者是做 personalab 的，这个产品也完全不在我的工作流里。",
+          "verbatim_quote": "mcp-doctor looks solid for DevOps teams, but why would a design lead care about package WARN verdicts? Give me visual user research reports first, then we'll talk about your next product.",
+          "day": 2
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "这是给工程师的 supply-chain 工具，跟我的设计评审流程毫无关系。我需要的是能把 persona feedback 直接拖进 Figma 的视觉化报告工具，不是 npm 包扫描器。",
+          "verbatim_quote": "同一个作者做了两个完全不同的产品？personalab 我还在等 visual report 功能，现在又来 mcp-doctor……focus 呢？",
+          "day": 3
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "这是给工程师管理 npm 依赖的安全工具，跟我的设计评审流程完全是两个世界。我现在急着准备 workspace switcher 的 design review，需要的是能在 30 分钟内生成视觉化 persona feedback 的工具，不是供应链扫描器。",
+          "verbatim_quote": "看了 mcp-doctor 的定价页面……这真的不是给设计师用的。我的团队工程师可能会喜欢，但那是他们的事。我现在需要解决的是怎么让 design review 报告看起来不像 1998 年的 IRC 日志。",
+          "day": 4
+        },
+        {
+          "action": "DO_NOTHING",
+          "mood": "annoyed",
+          "engage_score": 2,
+          "reason": "mcp-doctor 是给工程师的供应链安全工具，我是设计 lead——我的世界是 Figma、persona feedback、visual report。即使作者做过 personalab，这个产品对我的 design review 流程毫无帮助。我现在没时间学 CLI 或 GitHub Action，我需要的是能直接在 Figjam 里用的东西。",
+          "verbatim_quote": "作者做 personalab 时懂设计师的痛点，但 mcp-doctor 完全是工程师视角——就像给我一把很好的锤子，但我需要的是画笔。",
+          "day": 5
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "persona": "01_early_founder",
+      "final_action": "OPEN_GITHUB_ISSUE",
+      "will_pay": false,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "OPEN_GITHUB_ISSUE"
+      ],
+      "verbatim": "mcp-doctor 看起来解决了真实的安全问题（hardcoded API keys 这种事确实会发生），但问题是：我的 ICP 关心这个吗？还是只有 MCP 重度用户才会装这个 GitHub Action？先看看 adoption curve。"
+    },
+    {
+      "persona": "02_growth_pm",
+      "final_action": "UNSUBSCRIBE_OR_UNINSTALL",
+      "will_pay": false,
+      "unsubscribed": true,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "UNSUBSCRIBE_OR_UNINSTALL"
+      ],
+      "verbatim": "Evaluated mcp-doctor on relevance to growth PM work: speed gain (N/A), ICP fit (0/10), team leverage (0/10). Bookmarking for when we adopt MCP internally, but not today."
+    },
+    {
+      "persona": "03_user_researcher_hostile",
+      "final_action": "SUBSCRIBE_PRO",
+      "will_pay": true,
+      "unsubscribed": false,
+      "actions": [
+        "OPEN_GITHUB_ISSUE",
+        "DO_NOTHING",
+        "OPEN_GITHUB_ISSUE",
+        "SUBSCRIBE_PRO",
+        "SUBSCRIBE_PRO"
+      ],
+      "verbatim": "Finally someone is doing supply-chain work on MCP instead of hand-waving. But 'open-source rubric' ≠ 'validated rubric.' Show me the calibration: PASS packages that later had CVEs, WARN packages that turned out fine. Otherwise this is just another heuristic system pretending to be ground truth."
+    },
+    {
+      "persona": "04_vc_thesis",
+      "final_action": "SUBSCRIBE_PRO",
+      "will_pay": true,
+      "unsubscribed": false,
+      "actions": [
+        "OPEN_GITHUB_ISSUE",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "SUBSCRIBE_PRO"
+      ],
+      "verbatim": "mcp-doctor is technically sound (rubric is well-calibrated, 200-pkg validation is real), but founder needs to pick a lane: enterprise compliance gate ($20k+/yr, 50 customers = $1M ARR) or open-source forever. PLG at $19/mo won't cover support burden for security tooling."
+    },
+    {
+      "persona": "05_indie_hacker",
+      "final_action": "DO_NOTHING",
+      "will_pay": false,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING"
+      ],
+      "verbatim": "mcp-doctor looks solid (hardcoded API key in prod? yikes) but I don't have skin in the MCP game yet. Will revisit when I'm ready to ship my own server. Open-source rubric is chef's kiss though — that's how you build trust, not marketing."
+    },
+    {
+      "persona": "06_research_consultant",
+      "final_action": "SUBSCRIBE_PRO",
+      "will_pay": true,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "SUBSCRIBE_PRO"
+      ],
+      "verbatim": "Smart rubric design (20+ signals, calibrated against 200 packages), but unless I'm suddenly shipping MCP servers to production, this is someone else's problem. Curious how the solo founder will scale trust scoring as the ecosystem grows."
+    },
+    {
+      "persona": "07_oss_maintainer",
+      "final_action": "SUBSCRIBE_PRO",
+      "will_pay": true,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "OPEN_GITHUB_ISSUE",
+        "SHARE_WITH_TEAM",
+        "SUBSCRIBE_PRO",
+        "SUBSCRIBE_PRO"
+      ],
+      "verbatim": "mcp-doctor 解决了一个真实的生态问题（MCPwn + typosquats），rubric 开源了，API 免费。但我要先 clone 看看 core/ 的代码设计——14h shipped 的工具往往在可维护性上有坑。如果代码干净 + commit history 活跃，这值得推给 newsletter 的 50+ founders。"
+    },
+    {
+      "persona": "08_ai_safety_skeptic",
+      "final_action": "OPEN_GITHUB_ISSUE",
+      "will_pay": false,
+      "unsubscribed": false,
+      "actions": [
+        "OPEN_GITHUB_ISSUE",
+        "OPEN_GITHUB_ISSUE",
+        "OPEN_GITHUB_ISSUE",
+        "DO_NOTHING",
+        "OPEN_GITHUB_ISSUE"
+      ],
+      "verbatim": "mcp-doctor is addressing a real gap post-MCPwn, but I'd want to see: (1) red-team results against the rubric, (2) how it handles the 'stale maintainer = compromised?' inference leap, (3) whether the scoring avoids the RLHF-softening problem (i.e., does WARN actually warn, or does it become 'interesting but probably fine'). Open-source rubric is the right call. Worth contributing threat models."
+    },
+    {
+      "persona": "09_corporate_pm",
+      "final_action": "DO_NOTHING",
+      "will_pay": false,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING"
+      ],
+      "verbatim": "The hardcoded API key finding is concerning for the broader MCP ecosystem — we should flag this to our platform security team. But this is a dev-ops tool, not a PM tool."
+    },
+    {
+      "persona": "10_no_code_user",
+      "final_action": "DO_NOTHING",
+      "will_pay": false,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING"
+      ],
+      "verbatim": "honestly this looks super important for the MCP ecosystem but like... I don't even know what an MCP server is 😅 cool rubric though!"
+    },
+    {
+      "persona": "11_data_team_lead",
+      "final_action": "UNSUBSCRIBE_OR_UNINSTALL",
+      "will_pay": false,
+      "unsubscribed": true,
+      "actions": [
+        "OPEN_GITHUB_ISSUE",
+        "DO_NOTHING",
+        "OPEN_GITHUB_ISSUE",
+        "DO_NOTHING",
+        "UNSUBSCRIBE_OR_UNINSTALL"
+      ],
+      "verbatim": "mcp-doctor's supply-chain rubric is solid in principle, but the scoring lacks statistical rigor. Need to see: weight calibration methodology, inter-rater reliability (Cohen's kappa across N=10 re-scans), and deterministic threshold definition. Otherwise it's just another heuristic wrapper. Open issue: github.com/weiseer/mcp-doctor/issues/[new]"
+    },
+    {
+      "persona": "12_designer_lead",
+      "final_action": "DO_NOTHING",
+      "will_pay": false,
+      "unsubscribed": false,
+      "actions": [
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING",
+        "DO_NOTHING"
+      ],
+      "verbatim": "这个 mcp-doctor 看起来很专业，但我得问一下——这是给工程师用的吗？我们的 DevOps 人应该看这个。"
+    }
+  ]
+}
