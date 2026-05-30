@@ -26,3 +26,18 @@ Public scoring endpoint: `https://api.weiseer.com/scan?pkg=<package>`. Free tier
 ## License
 
 Apache-2.0
+
+
+---
+
+## 🆕 Fixed-price audit service (delivered in 24-48h)
+
+If you would rather have a human-reviewed report than wire up the CLI yourself:
+
+- **Single MCP audit — $49**: One package, deep-scanned, 1-page PDF verdict in 24h. [Buy on Gumroad](https://weiseer.gumroad.com)
+- **Full agent supply-chain audit — $299**: Your entire MCP config scanned, 5-page PDF report + 30min Q&A in 48h. [Buy on Gumroad](https://weiseer.gumroad.com)
+
+(The open-source CLI + free public API stays the same. The audit is for teams who want a fixed-price written deliverable for compliance / due-diligence purposes.)
+
+---
+
