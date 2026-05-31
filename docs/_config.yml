@@ -1,0 +1,5 @@
+title: "mcp-doctor — install-time MCP supply-chain trust gate"
+description: "Free, zero-auth scanner: PASS/WARN/BLOCK for MCP servers. Typosquat, hardcoded-secret, abandonware, OSV."
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-sitemap
